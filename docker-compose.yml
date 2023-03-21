@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  first-service:
+    build: '1 service/'
+    networks:
+      - services-network
+    container_name: first-service-container
+
+  second-service:
+    build: '2 service/'
+    networks:
+      - services-network
+    container_name: second-service-container
+
+
+  third-service:
+    build: '3 service/'
+    networks:
+      - services-network
+    container_name: third-service-container
+
+
+  mongo:
+    image: mongo
+    networks:
+      - services-network  
+    container_name: mongo-container
+
+  app-service:
+    build: '4 service/'
+    networks:
+      - services-network
+    ports:
+      - "81:80"
+    
+networks:
+  services-network:
+    driver: bridge
